@@ -34,6 +34,6 @@ change - срабатывает каждый раз, когда v-model меня
   v-model="selected"
   :options="[{ id: '1', name: 'John' }, { id: '2', name: 'Vladimir' }]"
   :keys="['id', 'name']"
-  placeholder="Выберите фрукт"
+  placeholder="Выберите имя"
 />
 ```
