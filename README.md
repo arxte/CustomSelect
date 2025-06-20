@@ -29,4 +29,11 @@ change - срабатывает каждый раз, когда v-model меня
 
 ## Examples 
 
-<pre lang="md"> ```vue <CustomSelect v-model="selected" :options="[{ id: '1', name: 'John' }, { id: '2', name: 'Vladimir' }]" :keys="['id', 'name']" placeholder="Выберите фрукт" /> ``` </pre>
+```vue
+<CustomSelect
+  v-model="selected"
+  :options="[{ id: '1', name: 'John' }, { id: '2', name: 'Vladimir' }]"
+  :keys="['id', 'name']"
+  placeholder="Выберите фрукт"
+/>
+```
