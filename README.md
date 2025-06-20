@@ -29,27 +29,6 @@ change - срабатывает каждый раз, когда v-model меня
 
 ## Examples 
 
-<pre> 
-    ```vue &lt;
-    <CustomSelect
-        v-model="selected"
-        :options="[{ id: '1', name: 'John' }, { id: '2', name: 'Vladimir' }]"
-        :keys="['id', 'name']"
-        placeholder="Выберите фрукт"
-    />
-/&gt;
-    ``` 
-</pre>
+<pre lang="md"> ```vue <CustomSelect v-model="selected" :options="[{ id: '1', name: 'John' }, { id: '2', name: 'Vladimir' }]" :keys="['id', 'name']" placeholder="Выберите фрукт" /> ``` </pre>
 
-<pre> 
-    ```vue &lt;
-    <CustomSelect
-        v-model="selected"
-        :options="[{ id: 1, name: 'John' }, { id: 2, name: 'Vladimir' }]"
-        :keys="['id', 'name']"
-        placeholder="Выберите фрукт"
-        isMulti
-    />
-/&gt;
-    ``` 
 </pre>
