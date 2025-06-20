@@ -1,5 +1,5 @@
 <template>
-  <div :class="['select', { 'select--disabled': isDisabled }]" ref="select" @click="toggleOptionsVisible">
+  <div :class="['select', { 'select--disabled': isDisabled, 'select--focused': isShowOptions }]" ref="select" @click="toggleOptionsVisible">
     <p :class="['select__value', { 'select__value--placeholder': !label }]">{{ label || placeholder}}</p>
 
     <div class="select__icon-wrapper">
@@ -17,15 +17,18 @@
           />
 
           <template v-if="copiedOptions.length">
-            <p
-                v-for="option in copiedOptions"
-                :key="option?.[keys[0]]"
-                :class="['select__option', { 'select__option--selected': checkIsSelected(option?.[keys[0]]) }]"
-                @click="changeValue(option?.[keys[0]])"
-            >
-              {{ option?.[keys[1]] }}
-              <CustomIcon :icon="checkIsSelected(option?.[keys[0]]) ? 'check' : ''" />
-            </p>
+
+            <TransitionGroup name="group">
+              <p
+                  v-for="option in copiedOptions"
+                  :key="option?.[keys[0]]"
+                  :class="['select__option', { 'select__option--selected': checkIsSelected(option?.[keys[0]]) }]"
+                  @click="changeValue(option?.[keys[0]])"
+              >
+                {{ option?.[keys[1]] }}
+                <CustomIcon :icon="checkIsSelected(option?.[keys[0]]) ? 'check' : ''" />
+              </p>
+            </TransitionGroup>
           </template>
 
           <p class="select__empty" v-else>
@@ -47,9 +50,6 @@ const emit = defineEmits(['change'])
 
 const props = defineProps<{
   placeholder?: string
-
-  icon?: string
-  iconColor?: string
 
   options: Array<Record<string, any>>
   keys: string[]
@@ -162,7 +162,7 @@ watchDebounced(isTimer,() => isTimer.value = true, { debounce: 100, maxWait: 100
 
 watch(() => modelValue.value, () => {
   label.value = getValue(modelValue.value)
-  emit('change')
+  emit('change', modelValue.value)
 })
 
 watch(() => props.options, () => resetFilter())
@@ -185,7 +185,7 @@ onMounted(() => {
   align-items: center;
   transition: .2s;
 
-  &:hover {
+  &:hover, &--focused {
     border-color: $blue-200;
     box-shadow: 0 0 3px $blue-200;
     cursor: pointer;
@@ -256,6 +256,8 @@ onMounted(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    transition: .2s;
 
     &:hover {
       cursor: pointer;

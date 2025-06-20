@@ -1,39 +1,46 @@
-# TestTask
+# import 
 
-This template should help get you started developing with Vue 3 in Vite.
+import CustomSelect from '@/components/CustomSelect.vue'
 
-## Recommended IDE Setup
+## node -v 
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+v18.189.0
 
-## Type Support for `.vue` Imports in TS
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## v-model 
 
-## Customize configuration
+Тип number, string, string[], number[], undefined, null
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Props
 
-## Project Setup
+options - массив обьектов (Тип - массив обьектов, где ключ = string, значение - любое)
 
-```sh
-npm install
-```
+keys - массив строке (Тип string[]), первый элемент это значение из обьекта, которое будет передаваться в v-model, а второе это для отображения в UI
 
-### Compile and Hot-Reload for Development
+placeholder - плейсхолдер (Тип string)
 
-```sh
-npm run dev
-```
+isMulti - контрлирует тип селекта мульвыбор или одиночный (Тип boolean)
 
-### Type-Check, Compile and Minify for Production
+isDisabled - контролирует выключен ли селект (Тип boolean)
 
-```sh
-npm run build
-```
+## Emits
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+change - срабатывает каждый раз, когда v-model меняется и передается наверх значение v-model
 
-```sh
-npm run test:unit
-```
+## Examples 
+
+<CustomSelect
+v-model="selected"
+:options="[{ id: '1', name: 'John' }, { id: '2', name: 'Vladimir' }]"
+:keys="['id', 'name']"
+placeholder="Выберите фрукт"
+/>
+
+
+<CustomSelect
+v-model="selected"
+:options="[{ id: 1, name: 'John' }, { id: 2, name: 'Vladimir' }]"
+:keys="['id', 'name']"
+placeholder="Выберите фрукт"
+isMulti
+/>
